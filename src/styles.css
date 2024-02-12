@@ -1,1 +1,67 @@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* You can add global styles to this file, and also import other style files */
+.fast{
+    -webkit-animation-duration:0.3s;
+    animation-duration:0.3s;
+    -webkit-animation-fill-mode:both;
+    animation-fill-mode:both
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h2 {
+    margin-bottom: 10px;
+  }
+  
+  .header img {
+    width: 50px;
+    height: 63px;
+  }
+  
+  .stepper {
+    max-width: 600px; /* Ajusta el ancho máximo según sea necesario */
+    margin: 0 auto;
+  }
+  
+  .step {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .step-content {
+    margin-bottom: 20px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-group button {
+    margin-right: 10px;
+  }
+  
+  .credencial-step {
+    /* Estilos para el segundo paso */
+    background-color: #fff; /* Fondo blanco */
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+  }
+  
+  .credencial-step p {
+    margin: 5px 0; /* Margen para los párrafos */
+  }
+  
+  .credencial-step .button-group {
+    margin-top: 20px; /* Margen superior para el grupo de botones */
+    text-align: center; /* Centrar los botones */
+  }
+  

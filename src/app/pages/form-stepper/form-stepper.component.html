@@ -1,0 +1,83 @@
+<div class="header">
+  <h2>Federación Mexicana de Fútbol</h2>
+  <img src="../../../assets/images/logo-fmf-50x63.png" alt="">
+</div>
+<mat-stepper linear #stepper class="stepper">
+  <!-- Primer paso -->
+  <mat-step [stepControl]="generalInfoForm" class="step">
+    <form [formGroup]="generalInfoForm">
+      <ng-template matStepLabel>Datos Generales</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName="nombre">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Apellido Paterno" formControlName="apellidoPaterno">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Apellido Materno" formControlName="apellidoMaterno">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="fechaNacimiento" (dateChange)="validarMayorEdad()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>      
+      <mat-form-field>
+        <mat-select placeholder="Género" formControlName="genero">
+          <mat-option *ngFor="let gender of comboGenero" [value]="gender.nombre">{{gender.nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Nacionalidad" formControlName="nacionalidad">
+          <mat-option *ngFor="let nationality of comboNacionalidades" [value]="nationality.nombre"> {{nationality.nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Club de Fútbol" formControlName="clubFutbol">
+          <mat-option *ngFor="let club of comboClubes" [value]="club.nombre">{{club.nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="ocultarRfc">
+        <input matInput placeholder="R.F.C." formControlName="rfc">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Ocupación" formControlName="ocupacion">
+      </mat-form-field>
+      <div>
+        <button mat-button color="warm" (click)="resetearFormulario()">Limpiar</button>
+        <button mat-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+    
+  </mat-step>
+
+ <!-- Segundo paso -->
+ <mat-step class="step credencial-step">
+  <ng-template matStepLabel>Confirmación</ng-template>
+  <div class="step-content">
+    <p>Nombre: {{ generalInfoForm.get('nombre').value }}</p>
+    <p>Apellido Paterno: {{ generalInfoForm.get('apellidoPaterno').value }}</p>
+    <p>Apellido Materno: {{ generalInfoForm.get('apellidoMaterno').value }}</p>
+    <p>Fecha de nacimiento: {{ formatDate(generalInfoForm.get('fechaNacimiento').value) }}</p>
+    <p>Gener: {{ generalInfoForm.get('genero').value }}</p>
+    <p>Nacionalidad: {{ generalInfoForm.get('nacionalidad').value }}</p>
+    <p>Club de futbol: {{ generalInfoForm.get('clubFutbol').value }}</p>
+    <p>RFC: {{ generalInfoForm.get('rfc').value }}</p>
+    <p>Ocupacion: {{ generalInfoForm.get('ocupacion').value }}</p>
+  </div>
+  <div class="button-group">
+    <button mat-button color="warm" matStepperPrevious>Back</button>
+    <button mat-button color="primary" matStepperNext>Next</button>
+  </div>
+</mat-step>
+
+  <!-- Tercer paso -->
+  <mat-step class="step">
+    <ng-template matStepLabel>Done</ng-template>
+    <div class="step-content">
+      <button mat-raised-button color="primary" (click)="createPDF()">Generar PDF</button>
+      <div class="button-group">
+        <button mat-button color="warm" matStepperPrevious>Back</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-stepper>
