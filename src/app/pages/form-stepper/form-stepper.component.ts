@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TDocumentDefinitions} from "pdfmake";
 import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as moment from 'moment';
 import { GendersService } from 'src/app/services/genders.service';
 import { NationalitiesService } from 'src/app/services/nationalities.service';
 import { ClubesService } from 'src/app/services/clubes.service';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-form-stepper',
@@ -37,8 +39,6 @@ export class FormStepperComponent implements OnInit {
     this.comboGenero = this.genderService.getGenders();
     this.comboClubes = this.clubesService.getClubes();
     this.comboNacionalidades = this.nationalityService.getNationalities();
-    console.log(this.comboClubes);
-    
     this.generalInfoForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidoPaterno: ['', Validators.required],
